@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMDB Sentiment Analysis</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <h1>IMDB Movie review sentiment</h1>
+  <!-- A textarea, with a select to choose the model and a send button -->
+  <form class="review">
+    <textarea id="text" cols="30" rows="6" ></textarea>
+    <div class="options">
+      <select id="model">
+        {% for model in models %}
+          <option value="{{ model }}">{{ model }}</option>
+        {% endfor %}
+      </select>
+      <button id="send" type="submit" class="material-symbols-outlined">send</button>
+    </div>
+  </form>
+
+  <!-- A div to show the result -->
+  <div id="result">
+    <h2>AI prediction</h2>
+
+    <!-- Explain what our app does -->
+    <p>
+      This app uses a machine learning model to predict the sentiment of a movie review. 
+      The model was trained on the IMDB dataset, and it can predict if a review is positive or negative.
+    </p>
+
+    <div class="prediction negative">
+      <div class="thumbs">
+        <span class="material-symbols-outlined">thumb_down_off</span>
+      </div>
+      <p>This review is <strong>negative</strong></p>
+    </div>
+
+    <div class="prediction positive">
+      <div class="thumbs">
+        <span class="material-symbols-outlined">thumb_up_off</span>
+      </div>
+      <p>This review is <strong>positive</strong></p>
+    </div>
+  </div>
+
+  <!-- The script to send the request -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
